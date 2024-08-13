@@ -30,7 +30,10 @@ const signin = async (user) => {
     }
 
     if (json.token) {
-      const user = JSON.parse(atob(json.token.split('.')[1]));
+      window.localStorage.setItem('token', json.token);
+      const rawPayload = json.token.split('.')[1];
+      const jsonPayload = window.atob(rawPayload);
+      const user = JSON.parse(jsonPayload);
       return user;
     }
   } catch (err) {
